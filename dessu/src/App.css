@@ -1,0 +1,328 @@
+/* ===== CSS Variables for consistent theming ===== */
+:root {
+  --bg-gradient-start: #f9fafc;  /* kept for reference but not used now */
+  --bg-gradient-end: #eef1f5;    /* kept for reference but not used now */
+  --card-bg: rgba(255, 255, 255, 0.9);
+  --card-shadow: 0 20px 40px -10px rgba(0, 20, 30, 0.2), 0 1px 3px rgba(0, 0, 0, 0.05);
+  --primary-color: #6366f1;
+  --primary-hover: #4f52e0;
+  --success-color: #10b981;
+  --success-hover: #059669;
+  --danger-color: #f43f5e;
+  --danger-hover: #e11d48;
+  --text-primary: #1e293b;
+  --text-secondary: #64748b;
+  --border-light: #e2e8f0;
+  --bg-soft: #f8fafc;
+  --radius-card: 32px;
+  --radius-element: 24px;
+  --radius-button: 40px;
+  --transition-default: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ===== Base styles ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  /* Changed background to a solid light color */
+  background: #a8bad6;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-primary);
+  line-height: 1.5;
+  padding: 1rem;
+}
+
+/* ===== Main container ===== */
+.app {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* ===== Card ===== */
+.todo-card {
+  background: var(--card-bg);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: var(--radius-card);
+  padding: 2.5rem 2rem;
+  box-shadow: var(--card-shadow);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  transition: var(--transition-default);
+}
+
+.todo-card:hover {
+  box-shadow: 0 25px 50px -12px rgba(0, 20, 30, 0.25);
+}
+
+/* ===== Title ===== */
+.title {
+  font-size: 2.2rem;
+  font-weight: 500;
+  text-align: center;
+  margin-bottom: 2rem;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, #1e293b, #2d3b4f);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ===== Input section ===== */
+.input-section {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.task-input {
+  flex: 1;
+  padding: 1rem 1.5rem;
+  border: 2px solid var(--border-light);
+  border-radius: var(--radius-button);
+  font-size: 1rem;
+  outline: none;
+  background: white;
+  transition: var(--transition-default);
+  color: var(--text-primary);
+}
+
+.task-input::placeholder {
+  color: #a0aec0;
+  font-weight: 300;
+}
+
+.task-input:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+}
+
+.add-btn {
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: var(--radius-button);
+  background: linear-gradient(135deg, var(--primary-color), #818cf8);
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: var(--transition-default);
+  box-shadow: 0 4px 6px -1px rgba(99, 102, 241, 0.2);
+  white-space: nowrap;
+}
+
+.add-btn:hover {
+  background: linear-gradient(135deg, var(--primary-hover), #6b75f0);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.3);
+}
+
+.add-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 6px -1px rgba(99, 102, 241, 0.2);
+}
+
+/* ===== Counters ===== */
+.counters {
+  display: flex;
+  justify-content: space-between;
+  background: var(--bg-soft);
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-element);
+  margin-bottom: 2rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+  border: 1px solid var(--border-light);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.02);
+}
+
+.counters span {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.counters span::before {
+  content: '';
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--primary-color);
+  opacity: 0.7;
+}
+
+.counters span:last-child::before {
+  background: var(--success-color);
+}
+
+/* ===== Task list ===== */
+.task-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* Individual task item */
+.task-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  background: white;
+  border-radius: var(--radius-element);
+  border: 1px solid var(--border-light);
+  transition: var(--transition-default);
+  animation: slideIn 0.3s ease-out;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+
+.task-item:hover {
+  border-color: #cbd5e1;
+  box-shadow: 0 8px 20px -8px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+/* Completed task */
+.task-item.completed {
+  background: #f1f5f9;
+  border-color: #cbd5e1;
+  opacity: 0.85;
+}
+
+.task-item.completed .task-text {
+  text-decoration: line-through;
+  color: var(--text-secondary);
+}
+
+.task-text {
+  flex: 1;
+  font-size: 1rem;
+  color: var(--text-primary);
+  word-break: break-word;
+  padding-right: 1rem;
+  transition: var(--transition-default);
+}
+
+/* Task action buttons container */
+.task-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+/* Base button styles inside tasks */
+.task-actions button {
+  padding: 0.5rem 1.25rem;
+  border: none;
+  border-radius: var(--radius-button);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition-default);
+  color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.complete-btn {
+  background: var(--success-color);
+}
+
+.complete-btn:hover {
+  background: var(--success-hover);
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(16, 185, 129, 0.3);
+}
+
+.delete-btn {
+  background: var(--danger-color);
+}
+
+.delete-btn:hover {
+  background: var(--danger-hover);
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(244, 63, 94, 0.3);
+}
+
+.task-actions button:active {
+  transform: scale(0.95);
+}
+
+/* ===== Empty state ===== */
+.empty-message {
+  text-align: center;
+  color: var(--text-secondary);
+  padding: 3rem 1.5rem;
+  background: var(--bg-soft);
+  border-radius: var(--radius-element);
+  border: 2px dashed var(--border-light);
+  font-style: italic;
+  font-size: 1.1rem;
+  transition: var(--transition-default);
+}
+
+.empty-message:hover {
+  border-color: #cbd5e1;
+  background: white;
+}
+
+/* ===== Animations ===== */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== Responsive design ===== */
+@media (max-width: 500px) {
+  .todo-card {
+    padding: 1.5rem;
+  }
+
+  .title {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .input-section {
+    flex-direction: column;
+  }
+
+  .add-btn {
+    width: 100%;
+    padding: 0.875rem;
+  }
+
+  .task-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.25rem;
+  }
+
+  .task-actions {
+    align-self: flex-end;
+    width: 100%;
+    justify-content: flex-end;
+  }
+
+  .counters {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+}
